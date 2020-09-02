@@ -707,8 +707,7 @@ public class ServiceManager implements RecordListener<Service> {
     public void putService(Service service) {
         if (!serviceMap.containsKey(service.getNamespaceId())) {
             synchronized (putServiceLock) {
-                //TODO 为什么在锁后面再判断一次，
-                // 仅会导致多次创建new ConcurrentHashMap<>(16)，不会影响serviceMap?
+                //TODO 为什么在锁后面再判断一次
                 if (!serviceMap.containsKey(service.getNamespaceId())) {
                     serviceMap.put(service.getNamespaceId(), new ConcurrentHashMap<>(16));
                 }
